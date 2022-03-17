@@ -46,7 +46,13 @@ namespace FunktionenZeichnen
         {
             panel2.Visible = false;
             panel3.Visible = false;
-            panel4.Visible = false;        
+            panel4.Visible = false;
+            label1.Visible = false;
+            label2.Visible = false;
+            label3.Visible = false;
+            label4.Visible = false;
+            label5.Visible = false; 
+            label6.Visible = false;
         }
         private void HideMenu()
         {
@@ -90,7 +96,7 @@ namespace FunktionenZeichnen
                     g.DrawLine(p, -3, ax, 3, ax);
 
                     g.DrawString(Convert.ToString(ax/zoom), s, Brushes.Black, ax - 3, 6);
-                    g.DrawString(Convert.ToString(ax/zoom), s, Brushes.Black, 9, ax);
+                    g.DrawString(Convert.ToString(ax/zoom), s, Brushes.Black, 9, -1*ax);
                 }
                 ax += 50;
                 ix += 1;
@@ -99,6 +105,19 @@ namespace FunktionenZeichnen
 
         private void DrawLinFunctionGraph(Double x1, Double y1, Double x2, Double y2)
         {
+            label1.Text = "m = " + Convert.ToString((y2 - y1) / (x2 - x1));
+            label2.Text = "n = " + Convert.ToString(y1 - x1 * ((y2 - y1) / (x2 - x1)));
+            label3.Text = "x0 = " + Convert.ToString(-1 * (y1 - x1 * ((y2 - y1) / (x2 - x1))) / ((y2 - y1) / (x2 - x1)));
+            label4.Text = "Sx( " + Convert.ToString(-1 * (y1 - x1 * ((y2 - y1) / (x2 - x1))) / ((y2 - y1) / (x2 - x1))) + " / 0 )";
+            label5.Text = "Sy( 0 / " + Convert.ToString(y1 - x1 * ((y2 - y1) / (x2 - x1))) + " )";
+            label6.Text = "f(x) = " + Math.Round(((y2 - y1) / (x2 - x1)), 2).ToString() + "x + " + Math.Round((y1 - x1 * ((y2 - y1) / (x2 - x1))), 2).ToString();
+            label1.Visible = true;
+            label2.Visible = true;
+            label3.Visible = true;
+            label4.Visible = true;
+            label5.Visible = true;
+            label6.Visible = true;
+
             Double m = (y2 - y1) / (x2 - x1);
             Double n = y1 - (x1 * m);
 
@@ -144,28 +163,20 @@ namespace FunktionenZeichnen
                 Y = X * X * a + X * b + c;
 
                 g.DrawEllipse(p, i, float.Parse((Y * -1 * zoom).ToString()), 1, 1);
-            }       
-        }
-
-        private void CalcFunction(Double x1, Double y1, Double x2, Double y2)
-        {
-            Double m, n, x0;
-
-            m = (y2 - y1) / (x2 - x1);
-            n = y1 - x1 * m;
-            x0 = -n / m;
-
-            if (y1 == y2) // Gerade || zur x-Achse
-            {
-                
             }
-            else if (x1 == x2)
-            {
-            }
-            else
-            {
-                
-            }
+
+            label1.Text = "Sx1( " + Convert.ToString(Math.Round((-1 * ((b / a) / 2) - Math.Sqrt(-1 * ((b / a) + (b / a)) / 4) - c / a), 2)) + " / 0 )";
+            label1.Visible = true;
+            label2.Text = "Sx2( " + Convert.ToString(Math.Round(-1 * ((b / a) / 2) + Math.Sqrt((-1 * (b / a + b / a) / 4) - c / a), 2)) + " / 0 )";
+            label2.Visible = true;
+            label3.Text = "S( " + Convert.ToString(Math.Round(-1 * ((b / a) / 2), 2)) + " / " + Convert.ToString(Math.Round(((-1 * (b / a + b / a) / 4) + c / a), 2)) + " )";
+            label3.Visible = true;
+            label4.Text = "a = " + Math.Round(a, 2).ToString();
+            label4.Visible = true;
+            label5.Text = "b = " + Math.Round(b, 2).ToString();
+            label5.Visible = true;
+            label6.Text = "c = " + Math.Round(c, 2).ToString();
+            label6.Visible = true;
         }
 
         private void btnFkt_Click(object sender, EventArgs e)
